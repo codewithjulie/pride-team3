@@ -16,7 +16,11 @@ const chatDisplay = document.querySelector('.chatDisplay')
 chatIcon.addEventListener('click', () => {
     chatbot.classList.toggle('hidden')
     if (!chatbot.classList.contains('hidden')) {
-        console.log('here');
+        // clear chatDisplay
+        while (chatDisplay.firstChild) {
+            chatDisplay.firstChild.remove()
+        }
+
         chats.bot1.forEach(msg => loading('bot', msg, false))
         setTimeout(() => {
             let timeout = 500
@@ -68,16 +72,20 @@ function handleUserSelection(e) {
 function chooseAction(msg) {
     switch (msg) {
         case chats.user1[0]:
-            chats.bot2.forEach(msg => loading('bot', msg, true))
+            let timeout = 500
+            chats.bot2.forEach(msg => {
+                setTimeout(() => {
+                    loading('bot', msg, true)
+                }, timeout)
+                timeout += 500
+            })
             break;
         case chats.user1[1]:
             chats.bot3.forEach(msg => loading('bot', msg, true))
             setTimeout(() => {
+                let timeout = 500
                 chats.user3.forEach(msg => {
-                    let timeout = 500
-                    setTimeout(() => {
-                        loading('user', msg, true)
-                    }, timeout)
+                    setTimeout(() => loading('user', msg, true), timeout)
                     timeout += 500
                 })
             }, 2000)
