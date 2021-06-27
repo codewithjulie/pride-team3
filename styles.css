@@ -1,8 +1,15 @@
-html,
+html{
+  background-image: url('background.png');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: 'cover';
+  },
 body {
   margin: 0;
   padding: 0;
   background-color: rgb(230, 230, 230);
+  
 }
 
 *,
